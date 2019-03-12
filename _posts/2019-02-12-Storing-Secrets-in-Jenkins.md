@@ -1,6 +1,6 @@
 ---
 layout: single
-classes: wide                    
+classes: wide
 toc: false
 author_profile: true
 toc_label: "Contents"      
@@ -29,7 +29,11 @@ A number of secret formats are supported out-of-box:
 
 ### Setting up Secrets in Freestyle Pipeline
 
-For example, let's create a Free style Project and use Credentials plugins to store Dockerhub credentials. Select _Username and password (separated)_ and enter Dockerhub credentials:
+For example, let's create a Free style Project and use Credentials plugins to store Dockerhub credentials. Select _Username and password (separated)_ and enter bindings for the credentials. These are the environment variables that username and password will be available as:
+
+![](/assets/images/storing-secrets-in-jenkins/bindings.png "Enter bindings")
+
+Next click on *Add* and select the right scope and enter Dockerhub credentials:
 
 ![](/assets/images/storing-secrets-in-jenkins/dockerhub_credentials.png "Enter Dockerhub credentials")
 
