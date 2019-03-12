@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Ashish Malik"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : /assets/images/me.png # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Infromation age Ninja"
   location         : "Melbourne"
   email            :
