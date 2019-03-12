@@ -1,6 +1,9 @@
 ---
 layout: single
-toc: true   
+classes: wide                    
+toc: false
+author_profile: true
+toc_label: "Contents"      
 tags: DevSecOps Jenkins Security Secret Management
 ---
 
