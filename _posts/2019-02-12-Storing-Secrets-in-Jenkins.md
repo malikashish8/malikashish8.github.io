@@ -2,9 +2,9 @@
 layout: single
 classes: wide
 toc: false
-author_profile: true
+author_profile: false
 toc_label: "Contents"      
-tags: DevSecOps Jenkins Security Secret Management
+tags: DevSecOps Jenkins Security WiP
 ---
 
 Jenkins is an open source automation tool that provides support for build and deployment. With hundreds of plugins Jenkins provides a lot of customization and extensibiliy.
@@ -40,3 +40,7 @@ Next click on *Add* and select the right scope and enter Dockerhub credentials:
 Use these credentials
 
 ![](/assets/images/storing-secrets-in-jenkins/use_secrets.png "use credentials")
+
+### Issues with Hardcoding Credentials
+
+It is managable to embed credentials in the build when you are solely managing a few builds. However, such an approach is not optimal when a team of users work on a number of build pipelines. Problems such as credential sharing, credential rotation and automation of builds call for a better approach to credential management. This is solved by a number of credential management products such as [Hashicorp Vault](https://www.vaultproject.io/), [Cyberark Vault](https://www.cyberark.com/products/privileged-account-security-solution/enterprise-password-vault/) and [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/). Some open source products like [CredStash](https://github.com/fugue/credstash) for AWS help with credential management.

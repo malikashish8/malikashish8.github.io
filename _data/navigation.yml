@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Upcoming"
+    url: /upcoming
   - title: "Vulnhub Walkthrough"
     url: https://malikashish8.github.io/Walkthrough
   - title: "Pentesting Notes"
