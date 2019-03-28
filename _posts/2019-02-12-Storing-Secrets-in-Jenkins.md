@@ -37,10 +37,59 @@ Next click on *Add* and select the right scope and enter Dockerhub credentials:
 
 ![](/assets/images/storing-secrets-in-jenkins/dockerhub_credentials.png "Enter Dockerhub credentials")
 
-Use these credentials
+Use these credentials:
 
 ![](/assets/images/storing-secrets-in-jenkins/use_secrets.png "use credentials")
 
-### Issues with Hardcoding Credentials
+### Using Credentials in Jenkins Pipeline
+
+Credentials can be similarly used in Jenkinsfile. In the following stage we are using `artifactory-credentials` to login to artifactory and push docker images to it. `usernameVariable` and `passwordVariable` are available in the `withCredentials` block:
+```groovy
+    stage("docker_push") {
+      withCredentials([usernamePassword(credentialsId: 'artifactory-credentials', 
+        passwordVariable: 'ARTIFACTORY_KEY', 
+        usernameVariable: 'ARTIFACTORY_USER')]) 
+      {
+        sh "echo $ARTIFACTORY_KEY | docker login -u $ARTIFACTORY_USER --password-stdin ${REGISTRY_URL}"
+        sh "docker tag myapp:latest ${REGISTRY_URL}/myapp:${shortCommit}"
+        sh "docker push ${REGISTRY_URL}/myapp:${shortCommit}"
+      } 
+```
+### Is it safe?
+Jenkins tries to provide some sence of security by masking the credentials in logs. It looks for an exact match and replaces them with asterisks (*****). But this control can simply be bypassed by a user with edit permission by encoding the credentials in the pipeline and printing them in logs.
+
+![](/assets/images/storing-secrets-in-jenkins/encode_password.png)
+
+![](/assets/images/storing-secrets-in-jenkins/password_encoded.png)
+
+Decode the encoded password:
+```bash
+dev@ubu:~ $ echo YWRtaW4xMjM0Cg== | base64 -d
+admin1234
+```
+Jenkins credentials are stored in Jenkins master [encrypted by Jenkins instance id](https://jenkins.io/doc/book/using/using-credentials/#credential-security). This file generally exists at `/var/lib/jenkins/credentials.xml`. It is therefore trivial to decrypt credentials saved in Jenkins for Jenkins administrators. Moreover any user that can SSH to Jenkins can read the credentials file since it has read permissions for everyone:
+```bash
+dev@ubu:/var/lib/jenkins$ ls -la credentials.xml 
+-rw-r--r-- 1 jenkins jenkins 4650 Mar 26 09:28 credentials.xml
+```
+This file has passwords encrypted with Jenkins Id:
+```xml
+<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+    <scope>GLOBAL</scope>
+    <id>artifactory-credentials</id>
+    <description></description>
+    <username>admin</username>
+    <password>{AQAAABAAAAAQom3LN7ei0wdm9cdOlGOa4GxDHzpndn0BUPeI4biARto=}</password>
+</com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+```
+
+Jenkins provide a handy utility at `/script` of the URL that can be used to decrypt passwords with the following script:
+```
+encryptedPassword = '{AQAAABAAAAAQom3LN7ei0wdm9cdOlGOa4GxDHzpndn0BUPeI4biARto=}'
+passwd = hudson.util.Secret.decrypt(encryptedPassword)
+println(passwd)
+```
+![](/assets/images/storing-secrets-in-jenkins/jenkins_script.png)
+### Management Issues with Hardcoding Credentials
 
 It is managable to embed credentials in the build when you are solely managing a few builds. However, such an approach is not optimal when a team of users work on a number of build pipelines. Problems such as credential sharing, credential rotation and automation of builds call for a better approach to credential management. This is solved by a number of credential management products such as [Hashicorp Vault](https://www.vaultproject.io/), [Cyberark Vault](https://www.cyberark.com/products/privileged-account-security-solution/enterprise-password-vault/) and [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/). Some open source products like [CredStash](https://github.com/fugue/credstash) for AWS help with credential management.
