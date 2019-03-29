@@ -4,7 +4,7 @@ classes: wide
 toc: true
 author_profile: false
 toc_label: "Contents"      
-tags: DevSecOps Jenkins Security WiP
+tags: DevSecOps Jenkins Security
 ---
 
 Jenkins is an open source automation tool that provides support for build and deployment. With hundreds of plugins Jenkins provides a lot of customization and extensibiliy.
