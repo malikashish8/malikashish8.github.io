@@ -1,6 +1,7 @@
 ---
 author_profile: true
 tags: Incident Analysis Data Breach
+toc: true
 comments: true
 permalink: /breach-analysis/
 ---
