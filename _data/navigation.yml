@@ -1,7 +1,7 @@
 # main links
 main:
-  - title: "Incident Analysis"
-    url: /incident-analysis
+  - title: "Breach Analysis"
+    url: /breach-analysis
   - title: "Upcoming"
     url: /upcoming
   - title: "Vulnhub Walkthrough"
