@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - fix-deploy
 
 jobs:
   github-pages:
