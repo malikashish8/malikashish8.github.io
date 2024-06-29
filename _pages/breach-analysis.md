@@ -5,20 +5,20 @@ comments: true
 permalink: /breach-analysis/
 ---
 
-## Breach Analysis
+# Breach Analysis
 
 Data Breach avoidance is the fist principle goal of most cyber security teams. But security breaches happen all the time. Can we learn something from them? Let's look at some of the incidents, unravel what happened and how it could have been avoided.
 
 Organizations might not be very transparent with sharing the details of how the compromise occurred because it might expose their lack of best practices. As such, details need to be pulled form unverified sources. So take the "How" information below with a pinch of salt.
 
-### Tangerine Telecom - 2024
+## Tangerine Telecom - 2024
 
 Australian ISP Tangerine was breached on February 18, 2024, with over 200,000 records stolen by hackers. Full personal information (names, date of birth, phone numbers, and email addresses) was taken; bank and password details were not.
 
-#### How
+### How
 * Contractor had access to legacy data of customers
 
-#### Missing controls
+### Missing controls
 > Assuming that contractor's device was compromised by a credential stealer providing access to their saved credentials and browser sessions to the attacker
 
 * [preventive] BYOD policy must mandate EDR, patching, etc. This can be implemented by tools like Duo that run device checks and integrate with SSO.
@@ -26,25 +26,25 @@ Australian ISP Tangerine was breached on February 18, 2024, with over 200,000 re
 * [detective] Control, Track, Monitory and Audit sensitive data such as customer PII
 
 
-#### Links
+### Links
 * [Tangerine Statement](https://www.tangerinetelecom.com.au/news/media-statement-tangerine-cyber-incident)
 
 
 
 
 
-### Opus Telecom - 2022
+## Opus Telecom - 2022
 
 Optus, a Telecom in Australia, was breach in 2022. Information which may have been exposed includes customers’ names, dates of birth, phone numbers, email addresses, and, for a subset of customers, addresses, ID document numbers such as driver's license or passport numbers. 
 
-#### How
+### How
 Unprotected and publicly exposed API
 
-#### Missing controls
+### Missing controls
 * [preventive] Public API endpoint without authentication and authorization
 * [detective] Automated scanning of API endpoints using DAST, EASM, vulnerability scanning tools could have detected this issue
 
-#### Links
+### Links
 
 * [Optus Statement](https://www.optus.com.au/about/media-centre/media-releases/2022/09/optus-notifies-customers-of-cyberattack)
 * [UpGard - How did the Optus Data Breach Happen?](https://www.upguard.com/blog/how-did-the-optus-data-breach-happen)
@@ -52,10 +52,12 @@ Unprotected and publicly exposed API
 
 **Template**
 
-### BreachName
+```
+## BreachName
 
-#### How
+### How
 
-#### Missing controls
+### Missing controls
 
-#### Links
+### Links
+```
