@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Incident Analysis"
+    url: /incident-analysis
   - title: "Upcoming"
     url: /upcoming
   - title: "Vulnhub Walkthrough"
