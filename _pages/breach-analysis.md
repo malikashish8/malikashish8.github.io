@@ -50,7 +50,7 @@ Unprotected and publicly exposed API
 * [UpGard - How did the Optus Data Breach Happen?](https://www.upguard.com/blog/how-did-the-optus-data-breach-happen)
 * [Wiki](https://en.wikipedia.org/wiki/2022_Optus_data_breach)
 
-**Template**
+## Template
 
 ```
 ## BreachName
